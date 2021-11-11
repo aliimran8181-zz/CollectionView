@@ -9,7 +9,11 @@ import UIKit
 
 class ViewController: UIViewController,UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
 
+    /* //MARK: IBOutlets */
     @IBOutlet weak var collectionView: UICollectionView!
+
+
+    // Initilizing variables
     let burgers = ["Big mac","Hamburger","Zinger", "Mighty Zinger","Double Cheese" ]
     let burgerImage: [UIImage] = [
         UIImage(named: "bigmac")!,
@@ -18,18 +22,29 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         UIImage(named: "mighty")!,
         UIImage(named: "double")!
     ]
+    
+    
+    
+    //MARK: ViewDIDLoad
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionView.dataSource = self
-        let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.sectionInset = UIEdgeInsets(top: 0,left: 5,bottom: 0,right: 5)
-        layout.minimumInteritemSpacing = 5
-        layout.itemSize = CGSize(width: (self.collectionView.frame.size.width - 20)/5, height: (self.collectionView.frame.size.height)/3)
-     
+        setUi()
        
         // Do any additional setup after loading the view.
     }
     
+    func setUi(){
+        let layout = self.collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.sectionInset = UIEdgeInsets(top: 0,left: 5,bottom: 0,right: 5)
+        layout.minimumInteritemSpacing = 5
+        layout.itemSize = CGSize(width: (self.collectionView.frame.size.width - 20)/2, height: (self.collectionView.frame.size.height)/3)
+    }
+    
+   /*
+    //MARK: Collection View Methods
+    
+    */
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
        return burgers.count
         
@@ -38,8 +53,9 @@ class ViewController: UIViewController,UICollectionViewDelegate, UICollectionVie
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! collectionViewCell
         cell.lblView.text = burgers[indexPath.item]
         cell.burgerImage.image = burgerImage[indexPath.item]
-        cell.layer.borderColor = UIColor.blue.cgColor
-        cell.layer.borderWidth = 1
+        cell.layer.borderColor = UIColor.green.cgColor
+        cell.layer.cornerRadius = 10
+        cell.layer.borderWidth = 2
     
         return cell
     }
